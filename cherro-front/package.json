@@ -36,8 +36,16 @@
       "last 1 safari version"
     ]
   },
-    "jest": {
-      "clearMocks": true
+  "jest": {
+    "clearMocks": true
+  },
+  "devDependencies": {
+    "husky": "^4.3.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "pre-push": "npm test"
     }
-  
+  }
 }
