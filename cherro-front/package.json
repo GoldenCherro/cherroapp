@@ -5,20 +5,20 @@
   "dependencies": {
     "axios": "^0.19.2",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.5",
+    "enzyme-adapter-react-16": "^1.15.2",
     "eslint-config-airbnb": "^18.2.1",
     "history": "^4.10.1",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -37,7 +37,12 @@
     ]
   },
   "jest": {
-    "clearMocks": true
+    "clearMocks": true,
+    "coverageThreshold": {
+      "global": {
+        "statements": 80
+      }
+    }
   },
   "devDependencies": {
     "husky": "^4.3.5"
