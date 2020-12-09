@@ -1,4 +1,4 @@
-import { Example } from 'src/models/example';
+import { Example } from '../../models/example';
 import { ExampleSerializer } from '../serializers/example-serializer';
 import { ApiService } from '../api-service';
 import { API_ROUTES } from '../api-routes';
