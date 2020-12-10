@@ -41,11 +41,13 @@ class ErrorBoundary extends React.Component {
   }
 
   render() {
-    if (this.state.hasError) {
+    const { hasError } = this.state;
+    if (hasError) {
       return <UnexpectedError />;
     }
 
-    return this.props.children;
+    const { children } = this.props;
+    return (children);
   }
 }
 

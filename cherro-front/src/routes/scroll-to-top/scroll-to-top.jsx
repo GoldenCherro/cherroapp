@@ -23,7 +23,8 @@ class ScrollToTop extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const currentUrl = ScrollToTop.urlFromLocation(this.props.location);
+    const { location } = this.props;
+    const currentUrl = ScrollToTop.urlFromLocation(location);
     const previousUrl = ScrollToTop.urlFromLocation(prevProps.location);
     if (currentUrl !== previousUrl) {
       window.scrollTo(0, 0);
@@ -31,7 +32,8 @@ class ScrollToTop extends React.Component {
   }
 
   render() {
-    return this.props.children;
+    const { children } = this.props;
+    return children;
   }
 }
 
