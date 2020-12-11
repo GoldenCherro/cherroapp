@@ -34,9 +34,12 @@ const defaultProps = {
 };
 
 const AppLink = (props) => {
-  const routePath = getRouteFor(props.routeName, props.pathParams, props.queryParams);
+  const {
+    routeName, pathParams, queryParams, targetBlank, className, children,
+  } = props;
+  const routePath = getRouteFor(routeName, pathParams, queryParams);
   let targetBlankProps = {};
-  if (props.targetBlank) {
+  if (targetBlank) {
     targetBlankProps = {
       target: '_blank',
       rel: 'noopener noreferrer',
@@ -44,12 +47,12 @@ const AppLink = (props) => {
   }
   return (
     <Link
-      className={props.className}
+      className={className}
       to={routePath}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...targetBlankProps}
     >
-      {props.children}
+      {children}
     </Link>
   );
 };

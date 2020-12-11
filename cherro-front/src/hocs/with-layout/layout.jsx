@@ -16,13 +16,14 @@ const IPropTypes = {
 const layoutIsValid = (layoutType) => Object.values(LAYOUT_TYPES).includes(layoutType);
 
 const Layout = (props) => {
-  if (!layoutIsValid(props.layoutType)) {
+  const { children, layoutType } = props;
+  if (!layoutIsValid(layoutType)) {
     throw new Error(`Invalid value for \`layoutType\`, was "${props.layoutType}"`);
   }
   return (
     <div>
       {
-        props.children
+        children
       }
     </div>
   );

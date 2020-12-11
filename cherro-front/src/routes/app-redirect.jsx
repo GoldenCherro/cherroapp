@@ -26,7 +26,8 @@ const defaultProps = {
 
 class AppRedirect extends React.Component {
   componentDidMount() {
-    goToPage(this.props.routeName, this.props.pathParams, this.props.queryParams);
+    const { routeName, pathParams, queryParams } = this.props;
+    goToPage(routeName, pathParams, queryParams);
   }
 
   render() {

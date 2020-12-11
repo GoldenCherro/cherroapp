@@ -35,11 +35,11 @@ const renderRoutes = (routeData) => (
   ))
 );
 
-const Router = (props) => (
+const Router = ({ routeConfig }) => (
   <VendorRouter history={history}>
     <ScrollToTop>
       <Switch>
-        {renderRoutes(props.routeConfig)}
+        {renderRoutes(routeConfig)}
       </Switch>
     </ScrollToTop>
   </VendorRouter>
