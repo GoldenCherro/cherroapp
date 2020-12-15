@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 const LAYOUT_TYPES = {
   HOME: 'home',
+  LOGIN: 'login',
+  REGISTER: 'register',
 };
 
 const IPropTypes = {
