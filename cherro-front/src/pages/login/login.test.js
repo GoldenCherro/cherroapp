@@ -13,7 +13,7 @@ describe('Login', () => {
     const nickField = output.find({ label: 'Nickname' }).first();
     const passField = output.find({ label: 'Password' }).first();
 
-    await act(async () => {
+    act(() => {
       nickField.props().onChange({ target: { value: nick } });
       passField.props().onChange({ target: { value: pass } });
     });
