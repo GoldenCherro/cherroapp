@@ -1,29 +1,62 @@
 import React, { useState } from 'react';
+import {
+  Grid,
+  Button,
+  TextField,
+  Slide,
+  Fade,
+  Snackbar,
+} from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Alert from 'react-bootstrap/Alert';
-// import InputGroup from 'react-bootstrap/InputGroup';
-import Button from '@material-ui/core/Button';
-import { TextField } from '@material-ui/core';
 import {
   AppLink,
   goToPage,
   routeNaming,
 } from '../../routes';
 import styles from './login.module.scss';
-// import globalStyles from '../../assets/stylesheets/global-styles.module.scss';
 import { LoginController } from '../../networking/controllers/login-controller';
+
+function SlideTransition(props) {
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <Slide {...props} direction="up" />;
+}
 
 const Login = () => {
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
-  let msg = '';
+  const [state, setState] = useState({
+    open: false,
+    Transition: Fade,
+  });
+  const [msg, setMsg] = useState('');
+
+  const handleClick = (Transition) => () => {
+    setState({
+      open: true,
+      Transition,
+    });
+  };
+  const handleClose = () => {
+    setState({
+      ...state,
+      open: false,
+    });
+  };
+  const handleCloseMsg = () => {
+    if (msg === '') {
+      setState({
+        ...state,
+        open: false,
+      });
+    }
+  };
 
   const logIn = async (data) => {
     data.preventDefault();
-    const loggear = await LoginController.logIn(nickname, password);
-    if (loggear.error) {
-      msg = loggear.message;
+    const loginIn = await LoginController.logIn(nickname, password);
+    if (loginIn.error) {
+      setMsg(loginIn.message);
     } else {
       goToPage(routeNaming.HOME);
     }
@@ -35,20 +68,18 @@ const Login = () => {
       <form className={styles.logInForm} onSubmit={logIn} noValidate autoComplete="off">
         <Grid
           container
-          className={styles.logInGrid}
           direction="column"
           justify="center"
           alignItems="center"
         >
+          <Typography
+            component="header"
+            className={styles.logInTitle}
+          >
+            Cherro-Login
+          </Typography>
           <div>
-            <Typography
-              component="header"
-              className={styles.logInTitle}
-            >
-              Cherro-Login
-            </Typography>
             <TextField
-              id="nickname-txtField"
               label="Nickname"
               variant="filled"
               value={nickname}
@@ -58,7 +89,6 @@ const Login = () => {
           </div>
           <div>
             <TextField
-              id="password-txtField"
               label="Password"
               variant="filled"
               value={password}
@@ -69,32 +99,37 @@ const Login = () => {
         </Grid>
         <Grid
           container
-          className={styles.logInGrid}
+          className={styles.logInGrid2}
           direction="row"
           justify="center"
           alignItems="center"
         >
           <Button
-            id="logInButton"
             variant="outlined"
             className="btn-prim"
             type="submit"
             disabled={nickname === '' || password === ''}
+            onClick={handleClick(SlideTransition)}
           >
             Log In
           </Button>
-
-          <Alert
-            show={msg !== ''}
-            variant="warning"
+          <Snackbar
+            open={state.open}
+            onClose={handleClose}
+            TransitionComponent={state.Transition}
+            onEnter={handleCloseMsg}
+            key={state.Transition.name}
           >
-            There was a problem
-          </Alert>
+            <MuiAlert
+              severity="warning"
+            >
+              {msg}
+            </MuiAlert>
+          </Snackbar>
           <AppLink
             routeName={routeNaming.REGISTER}
           >
             <Button
-              id="signUpButton"
               variant="outline"
             >
               Sign up here.
