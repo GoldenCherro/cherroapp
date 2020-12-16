@@ -1,11 +1,8 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import { Login } from './login';
 import { LoginController } from '../../networking/controllers/login-controller';
-import { Router } from '../../routes';
-import { routeConfig } from '../../route-components';
 
 jest.mock('../../networking/controllers/login-controller');
 
@@ -32,7 +29,7 @@ describe('Login', () => {
   });
 
   describe('when nickname and password are entered', () => {
-    it('login is enabled', async () => {
+    it('submit button is enabled', async () => {
       const nickname = faker.name.findName();
       const password = faker.internet.password();
       const output = shallow(<Login />);
@@ -44,7 +41,7 @@ describe('Login', () => {
   });
 
   describe('when textFields are empty', () => {
-    it('login is disabled', async () => {
+    it('submit button is disabled', async () => {
       const output = shallow(<Login />);
       setupTest('', '', output);
 
@@ -54,7 +51,7 @@ describe('Login', () => {
   });
 
   describe('Loggin In', () => {
-    const setupLogginIn = async (nick, pass, obj) => {
+    const setupLoggingIn = async (nick, pass, obj) => {
       const output = shallow(<Login />);
       setupTest(nick, pass, output);
 
@@ -62,7 +59,7 @@ describe('Login', () => {
 
       LoginController.logIn.mockImplementationOnce(() => (obj));
 
-      await act(async () => {
+      act(() => {
         loginForm.props().onSubmit({ preventDefault: () => {} });
       });
     };
@@ -70,9 +67,17 @@ describe('Login', () => {
     it('calls controller with nickname and password', async () => {
       const nick = faker.name.findName();
       const pass = faker.internet.password();
-      setupLogginIn(nick, pass, { nickname: nick, password: pass });
+      setupLoggingIn(nick, pass, { nickname: nick, password: pass });
 
       expect(LoginController.logIn).toBeCalledWith(nick, pass);
+    });
+
+    it('calls controller once', async () => {
+      const nick = faker.name.findName();
+      const pass = faker.internet.password();
+      setupLoggingIn(nick, pass, { nickname: nick, password: pass });
+
+      expect(LoginController.logIn).toHaveBeenCalledTimes(1);
     });
 
     describe('when sign in fails', () => {
