@@ -4,6 +4,8 @@ const history = createBrowserHistory();
 
 const routeNaming = {
   HOME: 'home',
+  LOGIN: 'login',
+  REGISTER: 'register',
   NOT_FOUND: 'notFound',
 };
 
@@ -34,7 +36,17 @@ const determineRouteParams = (route) => {
 const routes = [
   {
     name: routeNaming.HOME,
-    path: '/',
+    path: '/home',
+    exact: true,
+  },
+  {
+    name: routeNaming.LOGIN,
+    path: '/login',
+    exact: true,
+  },
+  {
+    name: routeNaming.REGISTER,
+    path: '/register',
     exact: true,
   },
   {
