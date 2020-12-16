@@ -29,7 +29,7 @@ describe('Login', () => {
   });
 
   describe('when nickname and password are entered', () => {
-    it('submit button is enabled', async () => {
+    it('shows a submit button that is enabled', async () => {
       const nickname = faker.name.findName();
       const password = faker.internet.password();
       const output = shallow(<Login />);
@@ -41,7 +41,7 @@ describe('Login', () => {
   });
 
   describe('when textFields are empty', () => {
-    it('submit button is disabled', async () => {
+    it('shows a submit button that is disabled', async () => {
       const output = shallow(<Login />);
       setupTest('', '', output);
 
@@ -80,8 +80,8 @@ describe('Login', () => {
       expect(LoginController.logIn).toHaveBeenCalledTimes(1);
     });
 
-    describe('when sign in fails', () => {
-      it('renders error message', async () => {
+    describe('when login fails', () => {
+      it('renders an error message', async () => {
         const failMessage = faker.lorem.words();
         const nickname = faker.name.findName();
         const password = faker.internet.password();
