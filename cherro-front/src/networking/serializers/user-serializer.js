@@ -1,12 +1,12 @@
 class UserSerializer {
-  static deSerialize(nickname, pass) {
+  static serialize(nickname, pass) {
     return {
       nickname,
       pass,
     };
   }
 
-  static serialize(user) {
+  static deSerialize(user) {
     return {
       nickname: user.nickname,
       password: user.pass,
