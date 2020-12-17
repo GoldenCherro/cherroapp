@@ -14,7 +14,6 @@ import {
   routeNaming,
 } from '../../routes';
 import styles from './register.module.scss';
-// import globalStyles from '../../assets/stylesheets/global-styles.module.scss';
 import { RegisterController } from '../../networking/controllers/register-controller';
 import { User } from '../../models/user';
 
