@@ -106,7 +106,7 @@ const Login = () => {
         >
           <Button
             variant="outlined"
-            className="btn-prim"
+            className={styles.loginBtn}
             type="submit"
             disabled={nickname === '' || password === ''}
             onClick={handleClick(SlideTransition)}
@@ -130,7 +130,7 @@ const Login = () => {
             routeName={routeNaming.REGISTER}
           >
             <Button
-              variant="outline"
+              variant="outlined"
             >
               Sign up here.
             </Button>

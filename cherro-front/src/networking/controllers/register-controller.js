@@ -3,16 +3,17 @@ import { API_ROUTES } from '../api-routes';
 import { UserSerializer } from '../serializers/user-serializer';
 import { ResponseSerializer } from '../serializers/response-serializer';
 
-class LoginController {
-  static async logIn(nickname, password) {
+class RegisterController {
+  static async register(user) {
     try {
-      const response = await ApiService.post(API_ROUTES.LOGIN,
-        { user: UserSerializer.serialize(nickname, password) });
+      const serUser = UserSerializer.serialize(user);
+      const response = await ApiService.post(API_ROUTES.REGISTER,
+        { user: serUser });
       return ResponseSerializer.deSerialize(response.data);
     } catch (err) {
-      return { error: true, message: 'Pasó algo amiguito' };
+      throw new Error({ error: true, message: err.message });
     }
   }
 }
 
-export { LoginController };
+export { RegisterController };
