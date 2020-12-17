@@ -6,6 +6,7 @@ var cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
+var registerRouter = require('./routes/register');
 
 var app = express();
 app.use(cors())
@@ -18,6 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
+app.use('/register', registerRouter);
 
 
 module.exports = app;
